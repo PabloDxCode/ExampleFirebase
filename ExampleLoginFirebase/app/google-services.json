@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "693864118571",
+    "firebase_url": "https://loginfirebasemvp.firebaseio.com",
+    "project_id": "loginfirebasemvp",
+    "storage_bucket": "loginfirebasemvp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693864118571:android:8e4c76a44420e117",
+        "android_client_info": {
+          "package_name": "com.example.pgutierrezd.loginfirebasemvp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693864118571-1pvv733ufjc60a26cgnhksf39nvqaeir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCWRzBUiI75F0p6qmBONUGVA_4DRkzO2Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693864118571:android:1c121bd0a93cbb5b",
+        "android_client_info": {
+          "package_name": "com.example.pgutierrezd.exampleloginfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693864118571-1pvv733ufjc60a26cgnhksf39nvqaeir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCWRzBUiI75F0p6qmBONUGVA_4DRkzO2Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

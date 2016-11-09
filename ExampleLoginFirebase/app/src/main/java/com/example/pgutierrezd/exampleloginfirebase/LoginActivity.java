@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         findViews();
         mAuth = FirebaseAuth.getInstance();
+        mAuthListener = null;
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -41,11 +42,12 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    //startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                    Log.d("TAG", "onAuthStateChanged:signed_in:" + user.getUid()+" "+user.getEmail());
+                    finish();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    //Log.d("TAG Inicio", "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
-                    Log.d("TAG", "onAuthStateChanged:signed_out");
+                    Log.d("TAG Inicio", "onAuthStateChanged:signed_out");
                 }
                 // ...
             }
@@ -54,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 signIn();
             }
         });
@@ -65,21 +68,30 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
     public void signUp(){
         mAuth.createUserWithEmailAndPassword(inputEmail.getText().toString(), inputPassword.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("TAG", "createUserWithEmail:onComplete:" + task.isSuccessful());
+                        Log.d("TAG SIGNUP", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
+                        progressBar.setVisibility(View.GONE);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(LoginActivity.this, "User created successful",
                                     Toast.LENGTH_SHORT).show();
                         }
-
                         // ...
                     }
                 });
@@ -90,25 +102,23 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("TAG", "signInWithEmail:onComplete:" + task.isSuccessful());
+                        Log.d("TAG SIGNIN", "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        progressBar.setVisibility(View.GONE);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w("TAG", "signInWithEmail", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                            Log.w("TAG SIGNIN", "signInWithEmail", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
                         }
-
                         // ...
                     }
                 });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
